@@ -9,7 +9,7 @@
   "commands": [
     {
       "name": "recent-chats",
-      "title": "Recent Chats",
+      "title": "Recent Whatsapp Chats",
       "subtitle": "Search and open recent WhatsApp chats from your local WhatsApp database",
       "description": "Search and open recent WhatsApp chats from your local WhatsApp database",
       "mode": "view"

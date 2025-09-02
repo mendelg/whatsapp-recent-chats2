@@ -1,4 +1,4 @@
-import { List, ActionPanel, Action, getPreferenceValues, open, showToast, Toast } from "@raycast/api";
+import { List, ActionPanel, Action, getPreferenceValues, open, showToast, Toast, closeMainWindow } from "@raycast/api";
 import { useEffect, useMemo, useState } from "react";
 import fs from "fs/promises";
 import path from "path";
@@ -170,7 +170,7 @@ export default function Command() {
             actions={
               <ActionPanel>
                 {digits ? (
-                  <Action title="Open in WhatsApp" onAction={() => open(`whatsapp://send?phone=${digits}&text=`)} />
+                  <Action title="Open in WhatsApp" onAction={() => openWhatsAppChat(digits)} />
                 ) : (
                   <Action.CopyToClipboard title="Copy JID" content={r.jid} />
                 )}
@@ -182,4 +182,24 @@ export default function Command() {
       })}
     </List>
   );
+}
+
+
+async function openWhatsAppChat(digits: string) {
+  const scheme = `whatsapp://send?phone=${digits}`;
+  try {
+    await execFileAsync("/usr/bin/open", [scheme]);
+    
+    // Close Raycast window after opening WhatsApp
+    closeMainWindow();
+    
+    return;
+  } catch {
+    // show an error toast
+    showToast({
+      style: Toast.Style.Failure,
+      title: "Failed to open WhatsApp chat",
+      message: "Please try again later.",
+    });
+  }
 }

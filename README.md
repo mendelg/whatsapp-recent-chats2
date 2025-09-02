@@ -5,7 +5,6 @@ A Raycast extension that displays your recent WhatsApp chats and allows you to q
 ## Prerequisites
 
 - Raycast App (macOS only)
-- SQLite3: `brew install sqlite3`
 - WhatsApp Desktop App (use at least once)
 - Grant Folder Access granted to Raycast when prompted
 

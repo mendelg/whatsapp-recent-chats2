@@ -73,7 +73,7 @@ async function cleanupTemp(copyMain: string) {
 // Try to run with -json; if not supported, fall back to CSV and parse it.
 async function runSqliteQuery(dbPath: string, query: string): Promise<any[]> {
   try {
-    const { stdout } = await execFileAsync(SQLITE_BIN, [dbPath, "-json", query], { maxBuffer: 10 * 1024 * 1024 });
+    const { stdout } = await execFileAsync(SQLITE_BIN, [dbPath, "-json", query], { maxBuffer: 10 * 1024 * 1024 , timeout: 4000});
     if (!stdout.trim()) return [];
     return JSON.parse(stdout);
   } catch {
